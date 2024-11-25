@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1>Create Trip</h1>
+    </header>
+    <main>
+        <form id="create-trip-form">
+            <div class="form-group">
+                <label for="trip-name">Trip Name</label>
+                <input type="text" id="trip-name" placeholder="e.g., Japan" required>
+            </div>
+            <div class="form-group">
+                <label for="trip-year">Year</label>
+                <input type="number" id="trip-year" placeholder="Year" required>
+            </div>
+            <div class="form-group">
+                <label for="currency">Currency</label>
+                <select id="currency" required>
+                    <option value="USD">USD</option>
+                    <option value="JPY">JPY</option>
+                    <option value="EUR">EUR</option>
+                    <option value="SGD">SGD</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">Create Trip</button>
+        </form>
+        <a href="index.html" class="btn">Back to Home</a>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
