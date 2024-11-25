@@ -7,6 +7,8 @@
     --header-bg: #0056b3;
     --form-bg: #f9f9f9;
     --border-color: #ddd;
+    --card-bg: #f4f8fb;
+    --highlight-bg: #eaf2f8;
     --font-family: 'Inter', sans-serif;
     --font-size: 16px;
 }
@@ -20,6 +22,8 @@ body.dark-mode {
     --header-bg: #003366;
     --form-bg: #2b2b2b;
     --border-color: #444;
+    --card-bg: #333;
+    --highlight-bg: #444;
 }
 
 /* Global Styles */
@@ -30,10 +34,10 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-    transition: background-color 0.3s, color 0.3s;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 header {
@@ -41,21 +45,22 @@ header {
     color: white;
     padding: 1.5rem;
     text-align: center;
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.8rem;
+    font-weight: 700;
     transition: background-color 0.3s;
 }
 
 main {
     flex: 1;
-    max-width: 700px;
-    margin: 30px auto;
+    max-width: 1200px;
+    margin: 20px auto;
     padding: 20px;
     background-color: var(--form-bg);
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s, color 0.3s;
     text-align: center;
+    width: 90%;
 }
 
 /* Footer Styles */
@@ -118,6 +123,19 @@ footer {
     background-color: #333;
 }
 
+/* Total Trip Expenditure */
+#total-spent {
+    background-color: var(--highlight-bg);
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--button-bg);
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
 /* Dropdown Styles */
 select {
     width: 100%;
@@ -166,18 +184,15 @@ input:focus, select:focus {
     border-color: var(--button-bg);
 }
 
-/* Trip Details and Expense List */
-#expense-list {
-    margin-top: 30px;
-}
-
+/* Expense List */
 #expense-items {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 #expense-items li {
-    background-color: var(--form-bg);
+    background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     padding: 15px;
     margin-bottom: 10px;
@@ -185,15 +200,16 @@ input:focus, select:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
 }
 
-#expense-items li p {
-    margin: 0;
-}
-
-#expense-items li .action-buttons {
-    display: flex;
-    gap: 10px;
+#expense-items h3 {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: left;
+    color: var(--button-bg);
 }
 
 /* Modal Styles */
@@ -258,7 +274,17 @@ input:focus, select:focus {
 /* Responsive Design */
 @media (max-width: 600px) {
     header {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
+    }
+
+    #total-spent {
+        font-size: 1.3rem;
+        padding: 15px;
+    }
+
+    #expense-items li {
+        padding: 10px;
+        font-size: 0.9rem;
     }
 
     .big-btn {
@@ -266,12 +292,7 @@ input:focus, select:focus {
         padding: 30px 15px;
     }
 
-    #expense-items li {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    #expense-items li .action-buttons {
-        margin-top: 10px;
+    #expense-items h3 {
+        font-size: 1rem;
     }
 }

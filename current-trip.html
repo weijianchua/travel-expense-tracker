@@ -33,8 +33,8 @@
                         <input type="number" id="expense-amount" placeholder="e.g., 2000" required>
                     </div>
                     <div class="form-group">
-                        <label for="alternate-amount">Amount (Alternate Currency)</label>
-                        <input type="number" id="alternate-amount" placeholder="e.g., 20">
+                        <label for="expense-date">Date</label>
+                        <input type="date" id="expense-date" required>
                     </div>
                     <div class="form-group">
                         <label for="payment-method">Payment Method</label>
@@ -61,6 +61,7 @@
 
         <section id="expense-list">
             <h2>Expenses</h2>
+            <p id="total-spent"></p>
             <ul id="expense-items"></ul>
         </section>
     </main>

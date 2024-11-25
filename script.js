@@ -2,8 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const trips = JSON.parse(localStorage.getItem("trips")) || [];
     const currentTripId = localStorage.getItem("currentTripId");
     const currentPage = document.body.getAttribute("data-page");
+    const defaultCurrency = localStorage.getItem("defaultCurrency") || "SGD";
 
-    // Add a "Home" navigation link to all pages
+    // Add "Home" navigation link to all pages
     const homeLink = document.createElement("a");
     homeLink.href = "index.html";
     homeLink.textContent = "Home";
@@ -16,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
         handleCurrentTripPage(trips, currentTripId);
     } else if (currentPage === "history") {
         handleHistoryPage(trips);
+    } else if (currentPage === "settings") {
+        handleSettingsPage();
     }
 
     // Handle Create Trip Page
@@ -51,8 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem("trips", JSON.stringify(trips));
             localStorage.setItem("currentTripId", newTrip.id);
 
-            showNotification("Trip created successfully!");
-            setTimeout(() => window.location.href = "current-trip.html", 3000);
+            window.location.href = "current-trip.html"; // Redirect immediately
         });
     }
 
@@ -61,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentTripDropdown = document.getElementById("current-trip-dropdown");
         const currentTripDetails = document.getElementById("current-trip-details");
         const expenseList = document.getElementById("expense-items");
+        const totalSpent = document.getElementById("total-spent");
         const expenseModal = document.getElementById("expense-modal");
         const addExpenseBtn = document.getElementById("add-expense-btn");
         const closeModalBtn = document.getElementById("close-expense-modal");
@@ -92,25 +95,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
         displayTripDetails(selectedTrip);
 
-        // Load expenses
+        // Load expenses and calculate totals
         const loadExpenses = () => {
             expenseList.innerHTML = "";
-            const expenses = selectedTrip.expenses || [];
-            expenses.forEach((expense, index) => {
-                const li = document.createElement("li");
-                li.innerHTML = `
-                    <div>
-                        <p><strong>${expense.description}</strong></p>
-                        <p>${expense.amount} ${selectedTrip.currency}</p>
-                        <p>${expense.alternateAmount ? `${expense.alternateAmount}` : "N/A"}</p>
-                        <p>${expense.paymentMethod} - ${expense.category}</p>
-                    </div>
-                    <div class="action-buttons">
-                        <button class="btn edit-expense" data-index="${index}">Edit</button>
-                        <button class="btn btn-secondary delete-expense" data-index="${index}">Delete</button>
-                    </div>
-                `;
-                expenseList.appendChild(li);
+            let total = 0;
+            const expensesByDate = selectedTrip.expenses.reduce((group, expense) => {
+                const date = expense.date || "Unknown Date";
+                group[date] = group[date] || [];
+                group[date].push(expense);
+                total += expense.amount;
+                return group;
+            }, {});
+
+            totalSpent.textContent = `Total Spent: ${total.toFixed(2)} ${selectedTrip.currency}`;
+
+            Object.keys(expensesByDate).forEach((date) => {
+                const dateHeader = document.createElement("h3");
+                dateHeader.textContent = date;
+                expenseList.appendChild(dateHeader);
+
+                expensesByDate[date].forEach((expense, index) => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `
+                        <div>
+                            <p><strong>${expense.description}</strong></p>
+                            <p>${expense.amount.toFixed(2)} ${selectedTrip.currency} (${defaultCurrency})</p>
+                            <p>${expense.paymentMethod} - ${expense.category}</p>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn edit-expense" data-index="${index}" data-date="${date}">Edit</button>
+                            <button class="btn btn-secondary delete-expense" data-index="${index}" data-date="${date}">Delete</button>
+                        </div>
+                    `;
+                    expenseList.appendChild(li);
+                });
             });
         };
 
@@ -121,47 +139,44 @@ document.addEventListener("DOMContentLoaded", () => {
             expenseModal.classList.add("show");
         });
 
-        // Close modal
         closeModalBtn.addEventListener("click", () => {
             expenseModal.classList.remove("show");
         });
 
-        // Add expense
         expenseForm.addEventListener("submit", (e) => {
             e.preventDefault();
 
             const description = document.getElementById("expense-description").value.trim();
             const amount = parseFloat(document.getElementById("expense-amount").value);
-            const alternateAmount = parseFloat(document.getElementById("alternate-amount").value) || null;
+            const date = document.getElementById("expense-date").value;
             const paymentMethod = document.getElementById("payment-method").value;
             const category = document.getElementById("expense-category").value;
 
-            if (!description || isNaN(amount)) {
+            if (!description || isNaN(amount) || !date) {
                 alert("Please enter valid expense details.");
                 return;
             }
 
-            const newExpense = { description, amount, alternateAmount, paymentMethod, category };
+            const newExpense = { description, amount, date, paymentMethod, category };
 
-            selectedTrip.expenses = selectedTrip.expenses || [];
             selectedTrip.expenses.push(newExpense);
-
             localStorage.setItem("trips", JSON.stringify(trips));
             loadExpenses();
-            expenseForm.reset();
             expenseModal.classList.remove("show");
+            expenseForm.reset();
         });
 
         // Edit/Delete Expense
         expenseList.addEventListener("click", (e) => {
             const index = parseInt(e.target.dataset.index, 10);
+            const date = e.target.dataset.date;
 
             if (e.target.classList.contains("edit-expense")) {
-                const expense = selectedTrip.expenses[index];
+                const expense = selectedTrip.expenses.filter((exp) => exp.date === date)[index];
                 if (expense) {
                     document.getElementById("expense-description").value = expense.description;
                     document.getElementById("expense-amount").value = expense.amount;
-                    document.getElementById("alternate-amount").value = expense.alternateAmount || "";
+                    document.getElementById("expense-date").value = expense.date;
                     document.getElementById("payment-method").value = expense.paymentMethod;
                     document.getElementById("expense-category").value = expense.category;
 
@@ -171,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         e.preventDefault();
                         expense.description = document.getElementById("expense-description").value.trim();
                         expense.amount = parseFloat(document.getElementById("expense-amount").value);
-                        expense.alternateAmount = parseFloat(document.getElementById("alternate-amount").value) || null;
+                        expense.date = document.getElementById("expense-date").value;
                         expense.paymentMethod = document.getElementById("payment-method").value;
                         expense.category = document.getElementById("expense-category").value;
 
@@ -184,17 +199,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             if (e.target.classList.contains("delete-expense")) {
-                selectedTrip.expenses.splice(index, 1);
+                selectedTrip.expenses = selectedTrip.expenses.filter((exp, i) => !(exp.date === date && i === index));
                 localStorage.setItem("trips", JSON.stringify(trips));
                 loadExpenses();
             }
-        });
-
-        // Update selected trip when dropdown changes
-        currentTripDropdown.addEventListener("change", (e) => {
-            const selectedId = e.target.value;
-            localStorage.setItem("currentTripId", selectedId);
-            location.reload();
         });
     }
 
@@ -219,12 +227,26 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Show Notification Banner
-    function showNotification(message) {
-        const banner = document.createElement("div");
-        banner.className = "notification-banner";
-        banner.textContent = message;
-        document.body.appendChild(banner);
-        setTimeout(() => banner.remove(), 3000);
+    // Handle Settings Page
+    function handleSettingsPage() {
+        const themeToggle = document.getElementById("theme-toggle");
+        const currencySelect = document.getElementById("default-currency");
+
+        // Set initial theme and currency
+        themeToggle.checked = document.body.classList.contains("dark-mode");
+        currencySelect.value = defaultCurrency;
+
+        themeToggle.addEventListener("change", () => {
+            if (themeToggle.checked) {
+                document.body.classList.add("dark-mode");
+            } else {
+                document.body.classList.remove("dark-mode");
+            }
+        });
+
+        currencySelect.addEventListener("change", () => {
+            const selectedCurrency = currencySelect.value;
+            localStorage.setItem("defaultCurrency", selectedCurrency);
+        });
     }
 });
