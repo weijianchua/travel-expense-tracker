@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Expense Tracker</title>
+    <title>Create Trip</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <script src="script.js" defer></script>
 </head>
-
-<body>
+<body data-page="create-trip">
     <header>
-        <h1>Create Trip</h1>
+        <h1>Create a New Trip</h1>
     </header>
     <main>
         <form id="create-trip-form">
@@ -21,21 +19,22 @@
             </div>
             <div class="form-group">
                 <label for="trip-year">Year</label>
-                <input type="number" id="trip-year" placeholder="Year" required>
+                <input type="number" id="trip-year" required>
             </div>
             <div class="form-group">
                 <label for="currency">Currency</label>
                 <select id="currency" required>
-                    <option value="USD">USD</option>
-                    <option value="JPY">JPY</option>
-                    <option value="EUR">EUR</option>
-                    <option value="SGD">SGD</option>
+                    <option value="SGD" selected>SGD ($)</option>
+                    <option value="USD">USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="JPY">JPY (¥)</option>
                 </select>
             </div>
             <button type="submit" class="btn">Create Trip</button>
         </form>
-        <a href="index.html" class="btn">Back to Home</a>
     </main>
-    <script src="script.js"></script>
+    <footer>
+        <p>Travel Expense Tracker | Developed by CWJ | Version 0.0.1</p>
+    </footer>
 </body>
 </html>

@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Expense Tracker</title>
+    <title>Current Trip</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <script src="script.js" defer></script>
 </head>
-
 <body data-page="current-trip">
     <header>
         <h1>Current Trip</h1>
@@ -19,7 +17,55 @@
             <select id="current-trip-dropdown"></select>
         </div>
         <div id="current-trip-details"></div>
-        <a href="index.html" class="btn">Back to Home</a>
+
+        <button id="add-expense-btn" class="btn">Add Expense</button>
+
+        <div id="expense-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Add Expense</h2>
+                <form id="expense-form">
+                    <div class="form-group">
+                        <label for="expense-description">Description</label>
+                        <input type="text" id="expense-description" placeholder="e.g., Lunch" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expense-amount">Amount (Trip Currency)</label>
+                        <input type="number" id="expense-amount" placeholder="e.g., 2000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="alternate-amount">Amount (Alternate Currency)</label>
+                        <input type="number" id="alternate-amount" placeholder="e.g., 20">
+                    </div>
+                    <div class="form-group">
+                        <label for="payment-method">Payment Method</label>
+                        <select id="payment-method" required>
+                            <option value="Cash">Cash</option>
+                            <option value="Credit Card">Credit Card</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="expense-category">Category</label>
+                        <select id="expense-category" required>
+                            <option value="Food">Food</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Accommodation">Accommodation</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Done</button>
+                    <button type="button" class="btn btn-secondary" id="close-expense-modal">Cancel</button>
+                </form>
+            </div>
+        </div>
+
+        <section id="expense-list">
+            <h2>Expenses</h2>
+            <ul id="expense-items"></ul>
+        </section>
     </main>
+    <footer>
+        <p>Travel Expense Tracker | Developed by CWJ | Version 0.0.1</p>
+    </footer>
 </body>
 </html>
