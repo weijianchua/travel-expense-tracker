@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            // Create new trip object
             const newTrip = {
                 id: Date.now(),
                 name,
@@ -50,11 +51,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 expenses: [],
             };
 
+            // Add the new trip
             trips.push(newTrip);
+
+            // Save updated trips to localStorage
             localStorage.setItem("trips", JSON.stringify(trips));
+
+            // Update current trip ID
             localStorage.setItem("currentTripId", newTrip.id);
 
-            window.location.href = "current-trip.html"; // Redirect immediately
+            // Redirect to the current trip page
+            window.location.href = "current-trip.html";
         });
     }
 
@@ -85,6 +92,12 @@ document.addEventListener("DOMContentLoaded", () => {
             currentTripDropdown.appendChild(option);
         });
 
+        currentTripDropdown.addEventListener("change", (e) => {
+            const selectedId = e.target.value;
+            localStorage.setItem("currentTripId", selectedId);
+            location.reload();
+        });
+
         // Display trip details
         const displayTripDetails = (trip) => {
             currentTripDetails.innerHTML = `
@@ -95,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         displayTripDetails(selectedTrip);
 
-        // Load expenses and calculate totals
+        // Load expenses for the selected trip
         const loadExpenses = () => {
             expenseList.innerHTML = "";
             let total = 0;
@@ -134,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         loadExpenses();
 
-        // Open modal to add expense
+        // Add expense modal handling
         addExpenseBtn.addEventListener("click", () => {
             expenseModal.classList.add("show");
         });
@@ -216,15 +229,31 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         trips.forEach((trip) => {
-            const tripDiv = document.createElement("div");
-            tripDiv.classList.add("trip-card");
-            tripDiv.innerHTML = `
+            const totalExpense = trip.expenses.reduce((total, expense) => total + expense.amount, 0);
+
+            const tripCard = document.createElement("div");
+            tripCard.classList.add("trip-card");
+            tripCard.innerHTML = `
                 <h3>${trip.name} (${trip.year})</h3>
-                <p>Currency: ${trip.currency}</p>
+                <p>Currency: <strong>${trip.currency}</strong></p>
+                <p>Total Expenses: <span class="total-expenses">${totalExpense.toFixed(2)} ${trip.currency}</span></p>
+                <p>In Default Currency: <span class="total-expenses">${(totalExpense * currencyConversionRate(trip.currency, defaultCurrency)).toFixed(2)} ${defaultCurrency}</span></p>
                 <p>Created At: ${new Date(trip.createdAt).toLocaleString()}</p>
             `;
-            historyContainer.appendChild(tripDiv);
+            historyContainer.appendChild(tripCard);
         });
+    }
+
+    // Mocked currency conversion rate function
+    function currencyConversionRate(fromCurrency, toCurrency) {
+        const rates = {
+            "SGD": 1,
+            "USD": 0.74,
+            "EUR": 0.69,
+            "JPY": 80,
+        };
+
+        return rates[toCurrency] / rates[fromCurrency];
     }
 
     // Handle Settings Page
