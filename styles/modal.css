@@ -1,0 +1,189 @@
+/* General Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    max-width: 500px;
+    width: 90%;
+    animation: fadeIn 0.3s ease-in-out;
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.modal-content.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--dark-text-color);
+}
+
+.modal-content .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.modal-content .modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.modal-content .modal-header .modal-close {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-content .modal-header .modal-close:hover {
+    color: var(--primary-color);
+}
+
+.modal-content .modal-body {
+    margin-bottom: 15px;
+}
+
+.modal-content .modal-body form label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.modal-content .modal-body form input,
+.modal-content .modal-body form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--form-bg);
+    color: var(--text-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-content .modal-body form input:focus,
+.modal-content .modal-body form select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
+    outline: none;
+}
+
+/* Modal Footer */
+.modal-content .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-content .modal-footer .btn-secondary {
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content .modal-footer .btn-secondary:hover {
+    background-color: var(--secondary-hover-color);
+}
+
+.modal-content .modal-footer .btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content .modal-footer .btn-primary:hover {
+    background-color: var(--primary-hover-color);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Dark Mode Modals */
+body.dark-mode .modal-content {
+    background-color: var(--dark-bg);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode .modal-content .modal-header .modal-close {
+    color: var(--dark-text-color);
+}
+
+body.dark-mode .modal-content .modal-header .modal-close:hover {
+    color: var(--primary-hover-color);
+}
+
+body.dark-mode .modal-content .modal-footer .btn-secondary {
+    background-color: var(--secondary-color);
+}
+
+body.dark-mode .modal-content .modal-footer .btn-secondary:hover {
+    background-color: var(--secondary-hover-color);
+}
+
+body.dark-mode .modal-content .modal-footer .btn-primary {
+    background-color: var(--primary-color);
+}
+
+body.dark-mode .modal-content .modal-footer .btn-primary:hover {
+    background-color: var(--primary-hover-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 15px;
+    }
+
+    .modal-content .modal-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .modal-content .modal-footer .btn-secondary,
+    .modal-content .modal-footer .btn-primary {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+    }
+}

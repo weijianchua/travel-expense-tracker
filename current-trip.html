@@ -3,70 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Current Trip</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <title>Current Trip - Travel Expense Tracker</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/header-footer.css">
+    <link rel="stylesheet" href="styles/modal.css">
+    <link rel="stylesheet" href="styles/current-trip.css">
+    <script src="scripts/main.js" defer></script>
+    <script src="scripts/modal.js" defer></script>
+    <script src="scripts/current-trip.js" defer></script>
 </head>
-<body data-page="current-trip">
+<body>
+    <!-- Header -->
     <header>
-        <h1>Current Trip</h1>
+        <h1>Travel Expense Tracker</h1>
+        <nav>
+            <a href="index.html" aria-label="Home" class="nav-btn">
+                <img src="assets/icons/homepg.png" alt="Home" class="home-icon"> Home
+            </a>
+            <a href="#" class="nav-btn open-login-modal" aria-label="Login">
+                <i class="fas fa-user-circle"></i> Login
+            </a>
+        </nav>
     </header>
+
+    <!-- Main Content -->
     <main>
-        <div>
-            <label for="current-trip-dropdown">Select Trip:</label>
-            <select id="current-trip-dropdown"></select>
-        </div>
-        <div id="current-trip-details"></div>
+        <!-- Trip Selection -->
+        <section id="trip-selector">
+            <h2>Select a Trip</h2>
+            <select id="trip-dropdown">
+                <!-- Options populated dynamically -->
+            </select>
+        </section>
 
-        <button id="add-expense-btn" class="btn">Add Expense</button>
+        <!-- Trip Overview -->
+        <section id="trip-overview">
+            <h2>Trip Details</h2>
+            <p id="trip-name">Trip Name: <span></span></p>
+            <p id="trip-year">Year: <span></span></p>
+            <p id="trip-currency">Currency: <span></span></p>
+            <p id="total-expenses">Total Expenses: <span></span></p>
+        </section>
 
-        <div id="expense-modal" class="modal hidden">
-            <div class="modal-content">
-                <h2>Add Expense</h2>
+        <!-- Expense List -->
+        <section id="expense-list">
+            <h2>Expenses</h2>
+            <div id="expenses">
+                <!-- Expenses will be dynamically populated -->
+            </div>
+            <button class="btn btn-primary open-add-expense-modal">Add Expense</button>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Travel Expense Tracker | Developed by CWJ | Version 1.0.0</p>
+    </footer>
+
+    <!-- Add/Edit Expense Modal -->
+    <div class="modal" id="expense-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add/Edit Expense</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
                 <form id="expense-form">
-                    <div class="form-group">
-                        <label for="expense-description">Description</label>
-                        <input type="text" id="expense-description" placeholder="e.g., Lunch" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="expense-amount">Amount (Trip Currency)</label>
-                        <input type="number" id="expense-amount" placeholder="e.g., 2000" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="expense-date">Date</label>
-                        <input type="date" id="expense-date" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="payment-method">Payment Method</label>
-                        <select id="payment-method" required>
-                            <option value="Cash">Cash</option>
-                            <option value="Credit Card">Credit Card</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="expense-category">Category</label>
-                        <select id="expense-category" required>
-                            <option value="Food">Food</option>
-                            <option value="Transport">Transport</option>
-                            <option value="Accommodation">Accommodation</option>
-                            <option value="Shopping">Shopping</option>
-                            <option value="Others">Others</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn">Done</button>
-                    <button type="button" class="btn btn-secondary" id="close-expense-modal">Cancel</button>
+                    <label for="expense-date">Date:</label>
+                    <input type="date" id="expense-date" required>
+
+                    <label for="expense-category">Category:</label>
+                    <select id="expense-category">
+                        <option value="Food">Food</option>
+                        <option value="Accommodation">Accommodation</option>
+                        <option value="Transport">Transport</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Others">Others</option>
+                    </select>
+
+                    <label for="expense-description">Description:</label>
+                    <input type="text" id="expense-description" placeholder="Enter a description" required>
+
+                    <label for="expense-amount">Amount (<span id="currency-symbol">---</span>):</label>
+                    <input type="number" id="expense-amount" placeholder="0.00" min="0" step="0.01" required>
+
+                    <label for="payment-method">Payment Method:</label>
+                    <select id="payment-method">
+                        <option value="Cash">Cash</option>
+                        <option value="Credit Card">Credit Card</option>
+                    </select>
+
+                    <button type="submit" class="btn btn-primary">Save Expense</button>
                 </form>
             </div>
         </div>
-
-        <section id="expense-list">
-            <h2>Expenses</h2>
-            <p id="total-spent"></p>
-            <ul id="expense-items"></ul>
-        </section>
-    </main>
-    <footer>
-        <p>Travel Expense Tracker | Developed by CWJ | Version 0.0.1</p>
-    </footer>
+    </div>
 </body>
 </html>

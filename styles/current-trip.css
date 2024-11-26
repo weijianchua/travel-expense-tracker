@@ -1,0 +1,149 @@
+/* General Layout */
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+/* Trip Selector */
+#trip-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#trip-selector select {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: var(--form-bg);
+    transition: box-shadow 0.3s ease;
+}
+
+#trip-selector select:focus {
+    box-shadow: 0 0 5px var(--primary-color);
+    outline: none;
+}
+
+/* Trip Overview */
+#trip-overview {
+    background-color: var(--form-bg);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+#trip-overview p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+#trip-overview span {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Expense List */
+#expense-list {
+    margin-top: 20px;
+}
+
+#expenses {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.expense-item {
+    background-color: var(--form-bg);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.expense-item p {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.expense-item button {
+    align-self: flex-start;
+    margin-top: 10px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.expense-item .btn-secondary {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+.expense-item .btn-secondary:hover {
+    background-color: var(--secondary-hover-color);
+}
+
+.expense-item .btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.expense-item .btn-primary:hover {
+    background-color: var(--primary-hover-color);
+}
+
+/* Add Expense Button */
+#expense-list .btn-primary {
+    display: block;
+    margin: 0 auto;
+    padding: 12px 20px;
+    font-size: 1rem;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#expense-list .btn-primary:hover {
+    background-color: var(--primary-hover-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #trip-overview {
+        padding: 10px;
+    }
+
+    #expenses {
+        gap: 10px;
+    }
+
+    .expense-item {
+        padding: 10px;
+    }
+
+    .expense-item button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+}

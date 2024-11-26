@@ -1,0 +1,221 @@
+/* General Layout */
+main {
+    padding: 20px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+#history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Trip Item Styling */
+.trip-item {
+    background-color: var(--form-bg);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.trip-item h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.trip-item p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.trip-item button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.trip-item .btn-secondary {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+.trip-item .btn-secondary:hover {
+    background-color: var(--secondary-hover-color);
+}
+
+.trip-item .btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.trip-item .btn-primary:hover {
+    background-color: var(--primary-hover-color);
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    max-width: 500px;
+    width: 90%;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.modal-close {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: var(--primary-color);
+}
+
+.modal-body {
+    margin-bottom: 15px;
+}
+
+.modal-body form label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.modal-body form input,
+.modal-body form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: var(--form-bg);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-footer .btn-secondary {
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: var(--secondary-hover-color);
+}
+
+.modal-footer .btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-footer .btn-primary:hover {
+    background-color: var(--primary-hover-color);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .trip-item h3 {
+        font-size: 1rem;
+    }
+
+    .trip-item p {
+        font-size: 0.9rem;
+    }
+
+    .trip-item button {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+
+    .modal-content {
+        padding: 15px;
+    }
+
+    .modal-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .modal-footer .btn-secondary,
+    .modal-footer .btn-primary {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+    }
+}

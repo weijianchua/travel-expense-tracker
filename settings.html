@@ -3,31 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <title>Settings - Travel Expense Tracker</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/header-footer.css">
+    <link rel="stylesheet" href="styles/settings.css">
+    <script src="scripts/main.js" defer></script>
+    <script src="scripts/settings.js" defer></script>
 </head>
-<body data-page="settings">
+<body>
+    <!-- Header -->
+    <!-- Header -->
     <header>
-        <h1>Settings</h1>
+        <h1>Travel Expense Tracker</h1>
+        <nav>
+            <a href="index.html" aria-label="Home" class="nav-btn">
+                <img src="assets/icons/homepg.png" alt="Home" class="home-icon"> Home
+            </a>
+            <a href="#" class="nav-btn open-login-modal" aria-label="Login">
+                <i class="fas fa-user-circle"></i> Login
+            </a>
+        </nav>
     </header>
+
+    <!-- Main Content -->
     <main>
-        <div class="form-group">
-            <label for="theme-toggle">Dark Mode</label>
-            <input type="checkbox" id="theme-toggle">
-        </div>
-        <div class="form-group">
-            <label for="default-currency">Default Currency</label>
-            <select id="default-currency">
-                <option value="SGD" selected>SGD ($)</option>
-                <option value="USD">USD ($)</option>
-                <option value="EUR">EUR (€)</option>
-                <option value="JPY">JPY (¥)</option>
-            </select>
-        </div>
+        <!-- Theme Settings -->
+        <section id="theme-settings">
+            <h2>Theme Settings</h2>
+            <div class="setting-item">
+                <label for="theme-toggle" class="toggle-label">
+                    <span>Enable Dark Mode</span>
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </section>
+
+        <!-- Colour Style Settings -->
+        <section id="colour-style-settings">
+            <h2>Light Mode Colour Style</h2>
+            <div class="setting-item colour-options">
+                <div class="colour-circle" data-colour="white" title="White"></div>
+                <div class="colour-circle" data-colour="blue" title="Blue"></div>
+                <div class="colour-circle" data-colour="orange" title="Orange"></div>
+                <div class="colour-circle" data-colour="pink" title="Pink"></div>
+                <div class="colour-circle" data-colour="green" title="Green"></div>
+                <div class="colour-circle" data-colour="red" title="Red"></div>
+            </div>
+        </section>
+
+        <!-- Default Currency Settings -->
+        <section id="currency-settings">
+            <h2>Default Currency</h2>
+            <div class="setting-item">
+                <label for="default-currency">Select Currency:</label>
+                <select id="default-currency">
+                    <option value="SGD">SGD ($) - Singapore Dollar</option>
+                    <option value="USD">USD ($) - US Dollar</option>
+                    <option value="EUR">EUR (€) - Euro</option>
+                    <option value="JPY">JPY (¥) - Japanese Yen</option>
+                    <option value="GBP">GBP (£) - British Pound</option>
+                    <option value="AUD">AUD ($) - Australian Dollar</option>
+                    <option value="TWD">TWD (NT$) - Taiwan Dollar</option>
+                    <option value="HKD">HKD (HK$) - Hong Kong Dollar</option>
+                    <option value="CNY">CNY (¥) - Chinese Yuan</option>
+                    <option value="KRW">KRW (₩) - South Korean Won</option>
+                    <option value="MYR">MYR (RM) - Malaysian Ringgit</option>
+                    <option value="IDR">IDR (Rp) - Indonesian Rupiah</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Data Management Settings -->
+        <section id="data-settings">
+            <h2>Data Management</h2>
+            <div class="setting-item">
+                <button id="reset-data" class="btn btn-secondary">Reset All Data</button>
+            </div>
+        </section>
     </main>
+
+    <!-- Footer -->
     <footer>
-        <p>Travel Expense Tracker | Developed by CWJ | Version 0.0.1</p>
+        <p>Travel Expense Tracker | Developed by CWJ | Version 1.0.0</p>
     </footer>
 </body>
 </html>

@@ -3,38 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Trip</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <title>Create Trip - Travel Expense Tracker</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/header-footer.css">
+    <link rel="stylesheet" href="styles/create-trip.css">
+    <script src="scripts/main.js" defer></script>
+    <script src="scripts/create-trip.js" defer></script>
 </head>
-<body data-page="create-trip">
+<body>
+    <!-- Header -->
     <header>
-        <h1>Create a New Trip</h1>
+        <h1>Travel Expense Tracker</h1>
+        <nav>
+            <a href="index.html" aria-label="Home" class="nav-btn">
+                <img src="assets/icons/homepg.png" alt="Home" class="home-icon"> Home
+            </a>
+            <a href="#" class="nav-btn open-login-modal" aria-label="Login">
+                <i class="fas fa-user-circle"></i> Login
+            </a>
+        </nav>
     </header>
+
+    <!-- Main Content -->
     <main>
-        <form id="create-trip-form">
-            <div class="form-group">
-                <label for="trip-name">Trip Name</label>
-                <input type="text" id="trip-name" placeholder="e.g., Japan" required>
-            </div>
-            <div class="form-group">
-                <label for="trip-year">Year</label>
-                <input type="number" id="trip-year" required>
-            </div>
-            <div class="form-group">
-                <label for="currency">Currency</label>
-                <select id="currency" required>
-                    <option value="SGD" selected>SGD ($)</option>
-                    <option value="USD">USD ($)</option>
-                    <option value="EUR">EUR (€)</option>
-                    <option value="JPY">JPY (¥)</option>
+        <section id="create-trip-form">
+            <h2>Trip Details</h2>
+            <form id="new-trip-form">
+                <label for="trip-name">Trip Name:</label>
+                <input type="text" id="trip-name" placeholder="Enter trip name" required>
+
+                <label for="trip-year">Year:</label>
+                <input type="number" id="trip-year" min="2000" max="2100" value="" required>
+
+                <label for="trip-currency">Currency:</label>
+                <select id="trip-currency">
+                    <option value="SGD">SGD ($) - Singapore Dollar</option>
+                    <option value="USD">USD ($) - US Dollar</option>
+                    <option value="EUR">EUR (€) - Euro</option>
+                    <option value="JPY">JPY (¥) - Japanese Yen</option>
+                    <option value="GBP">GBP (£) - British Pound</option>
+                    <option value="AUD">AUD ($) - Australian Dollar</option>
+                    <option value="TWD">TWD (NT$) - Taiwan Dollar</option>
+                    <option value="HKD">HKD (HK$) - Hong Kong Dollar</option>
+                    <option value="CNY">CNY (¥) - Chinese Yuan</option>
+                    <option value="KRW">KRW (₩) - South Korean Won</option>
+                    <option value="MYR">MYR (RM) - Malaysian Ringgit</option>
+                    <option value="IDR">IDR (Rp) - Indonesian Rupiah</option>
                 </select>
-            </div>
-            <button type="submit" class="btn">Create Trip</button>
-        </form>
+
+                <button type="submit" class="btn btn-primary">Create Trip</button>
+            </form>
+        </section>
     </main>
+
+    <!-- Footer -->
     <footer>
-        <p>Travel Expense Tracker | Developed by CWJ | Version 0.0.1</p>
+        <p>Travel Expense Tracker | Developed by CWJ | Version 1.0.0</p>
     </footer>
 </body>
 </html>

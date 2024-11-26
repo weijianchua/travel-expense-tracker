@@ -3,23 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Expense Tracker</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Home - Travel Expense Tracker</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/header-footer.css">
+    <link rel="stylesheet" href="styles/modal.css">
+    <script src="scripts/main.js" defer></script>
+    <script src="scripts/modal.js" defer></script>
 </head>
-<body data-page="home">
+<body>
+    <!-- Header -->
     <header>
         <h1>Travel Expense Tracker</h1>
+        <nav>
+            <a href="index.html" aria-label="Home" class="nav-btn">
+                <img src="assets/icons/homepg.png" alt="Home" class="home-icon"> Home
+            </a>
+            <a href="#" class="nav-btn open-login-modal" aria-label="Login">
+                <i class="fas fa-user-circle"></i> Login
+            </a>
+        </nav>
     </header>
+
+    <!-- Main Content -->
     <main>
-        <div class="grid">
-            <a href="history.html" class="big-btn">History</a>
-            <a href="current-trip.html" class="big-btn">Current Trip</a>
-            <a href="settings.html" class="big-btn">Settings</a>
-            <a href="create-trip.html" class="big-btn">Create Trip</a>
-        </div>
+        <!-- Welcome Section -->
+        <section id="welcome-section" class="card">
+            <h2>Welcome Back!</h2>
+            <p>Your ultimate travel companion for managing expenses, planning trips, and staying organised.</p>
+        </section>
+
+        <!-- Navigation Buttons -->
+        <section id="navigation-buttons" class="grid-container">
+            <a href="history.html" class="nav-card">
+                <i class="fas fa-history"></i>
+                <span>View History</span>
+            </a>
+            <a href="current-trip.html" class="nav-card">
+                <i class="fas fa-suitcase"></i>
+                <span>Current Trip</span>
+            </a>
+            <a href="settings.html" class="nav-card">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+            <a href="create-trip.html" class="nav-card">
+                <i class="fas fa-plus-circle"></i>
+                <span>Create New Trip</span>
+            </a>
+        </section>
+
+        <!-- Weather Widget -->
+        <section id="weather-widget" class="card">
+            <h3>Current Weather</h3>
+            <div id="weather-info">
+                <div id="weather-main">
+                    <p id="location">Fetching location...</p>
+                    <p id="temperature">--°C</p>
+                    <p id="weather-description">--</p>
+                </div>
+                <div id="weather-icon"></div>
+            </div>
+        </section>
     </main>
+
+    <!-- Footer -->
     <footer>
-        <p>Travel Expense Tracker | Developed by CWJ | Version 0.0.1</p>
+        <p>Travel Expense Tracker | Developed by CWJ | Version 1.0.0</p>
     </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <label for="login-email">Email:</label>
+                    <input type="email" id="login-email" placeholder="Enter your email" required>
+                    
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" required>
+                    
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="register-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Register</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="register-form">
+                    <label for="register-name">Name:</label>
+                    <input type="text" id="register-name" placeholder="Enter your name" required>
+
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" placeholder="Enter your email" required>
+
+                    <label for="register-password">Password:</label>
+                    <input type="password" id="register-password" placeholder="Enter your password" required>
+
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>Already have an account? <a href="#" class="open-login-modal">Login here</a></p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

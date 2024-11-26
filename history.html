@@ -3,21 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>History</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <title>History - Travel Expense Tracker</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/header-footer.css">
+    <link rel="stylesheet" href="styles/modal.css">
+    <link rel="stylesheet" href="styles/history.css">
+    <script src="scripts/main.js" defer></script>
+    <script src="scripts/modal.js" defer></script>
+    <script src="scripts/history.js" defer></script>
 </head>
-<body data-page="history">
+<body>
+    <!-- Header -->
     <header>
-        <h1>History</h1>
+        <h1>Travel Expense Tracker</h1>
+        <nav>
+            <a href="index.html" aria-label="Home" class="nav-btn">
+                <img src="assets/icons/homepg.png" alt="Home" class="home-icon"> Home
+            </a>
+            <a href="#" class="nav-btn open-login-modal" aria-label="Login">
+                <i class="fas fa-user-circle"></i> Login
+            </a>
+        </nav>
     </header>
+
+    <!-- Main Content -->
     <main>
-        <div id="history-container" class="history-grid">
-            <!-- History cards will be dynamically injected here -->
-        </div>
+        <section id="trip-history">
+            <h2>Your Trips</h2>
+            <div id="history-list">
+                <!-- Trip entries will be dynamically populated here -->
+            </div>
+        </section>
     </main>
+
+    <!-- Footer -->
     <footer>
-        <p>Travel Expense Tracker | Developed by CWJ | Version 0.0.1</p>
+        <p>Travel Expense Tracker | Developed by CWJ | Version 1.0.0</p>
     </footer>
+
+    <!-- Edit Trip Modal -->
+    <div class="modal" id="edit-trip-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Trip</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="edit-trip-form">
+                    <label for="edit-trip-name">Trip Name:</label>
+                    <input type="text" id="edit-trip-name" required>
+
+                    <label for="edit-trip-year">Year:</label>
+                    <input type="number" id="edit-trip-year" min="2000" max="2100" required>
+
+                    <label for="edit-trip-currency">Currency:</label>
+                    <select id="edit-trip-currency">
+                        <option value="SGD">SGD ($) - Singapore Dollar</option>
+                        <option value="USD">USD ($) - US Dollar</option>
+                        <option value="EUR">EUR (€) - Euro</option>
+                        <option value="JPY">JPY (¥) - Japanese Yen</option>
+                        <option value="GBP">GBP (£) - British Pound</option>
+                        <option value="AUD">AUD ($) - Australian Dollar</option>
+                        <option value="TWD">TWD (NT$) - Taiwan Dollar</option>
+                        <option value="HKD">HKD (HK$) - Hong Kong Dollar</option>
+                        <option value="CNY">CNY (¥) - Chinese Yuan</option>
+                        <option value="KRW">KRW (₩) - South Korean Won</option>
+                        <option value="MYR">MYR (RM) - Malaysian Ringgit</option>
+                        <option value="IDR">IDR (Rp) - Indonesian Rupiah</option>
+                    </select>
+
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Trip Modal -->
+    <div class="modal" id="delete-trip-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Delete Trip</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this trip? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary modal-close">Cancel</button>
+                <button class="btn btn-primary" id="confirm-delete">Delete</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

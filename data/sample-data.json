@@ -1,0 +1,62 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "John Doe",
+            "email": "john.doe@example.com",
+            "password": "hashed_password", // Consider using a hashed password for security simulation
+            "defaultCurrency": "SGD",
+            "theme": "blue",
+            "trips": [
+                {
+                    "id": 1,
+                    "name": "Japan Vacation",
+                    "year": 2024,
+                    "currency": "JPY",
+                    "expenses": [
+                        {
+                            "id": 1,
+                            "date": "2024-03-01",
+                            "category": "Food",
+                            "description": "Ramen Lunch",
+                            "amount": 1200,
+                            "paymentMethod": "Cash"
+                        },
+                        {
+                            "id": 2,
+                            "date": "2024-03-02",
+                            "category": "Transport",
+                            "description": "Shinkansen Ticket",
+                            "amount": 14000,
+                            "paymentMethod": "Credit Card"
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "name": "Australia Adventure",
+                    "year": 2023,
+                    "currency": "AUD",
+                    "expenses": [
+                        {
+                            "id": 1,
+                            "date": "2023-12-10",
+                            "category": "Accommodation",
+                            "description": "Hotel Stay",
+                            "amount": 150,
+                            "paymentMethod": "Credit Card"
+                        },
+                        {
+                            "id": 2,
+                            "date": "2023-12-11",
+                            "category": "Entertainment",
+                            "description": "Zoo Tickets",
+                            "amount": 50,
+                            "paymentMethod": "Cash"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
